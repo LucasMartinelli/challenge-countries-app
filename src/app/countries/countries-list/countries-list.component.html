@@ -1,0 +1,34 @@
+<main>
+  <div class="container">
+    <div class="search-bar">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search for a country"
+        [(ngModel)]="searchFilter">
+      <select class="region-input" placeholder="Filter by Region">
+        <option value="volvo">Africa</option>
+        <option value="saab">Americas</option>
+        <option value="mercedes">Asia</option>
+        <option value="audi">Europe</option>
+        <option value="audi">Oceania</option>
+      </select>
+    </div>
+    <div class="countries-grid" *ngIf="source">
+      <a *ngFor="let country of countries" [routerLink]="['/country/',country.alpha3Code]">
+        <article class="card">
+              <div class="flag" [ngStyle]="{'background-image': 'url(' + country.flag + ')'}">
+                &nbsp;
+              </div>
+              <header>{{ country.name }}</header>
+              <ul>
+                <li><span>Population:</span> {{ country.population | number }}</li>
+                <li><span>Region:</span> {{ country.region }}</li>
+                <li><span>Capital:</span> {{ country.capital }}</li>
+              </ul>
+
+        </article>
+      </a>
+    </div>
+  </div>
+</main>

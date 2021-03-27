@@ -1,0 +1,42 @@
+<main>
+  <div class="container">
+    <div class="command-bar">
+      <a routerLink="">
+        <button>Back</button>
+      </a>
+    </div>
+    <div class="country-info" *ngIf="country$ | async as country">
+
+        <div class="flag" [ngStyle]="{'background-image': 'url(' + country.flag + ')'}">
+          &nbsp;
+        </div>
+
+        <article class="info">
+          <header>{{ country.name }}</header>
+          <section class="row">
+            <ul class="col1">
+              <li><span>Native Name:</span> {{ country.nativeName }}</li>
+              <li><span>Population:</span> {{ country.population | number }}</li>
+              <li><span>Region:</span> {{ country.region }}</li>
+              <li><span>Sub Region:</span> {{ country.subregion }}</li>
+              <li><span>Capital:</span> {{ country.capital }}</li>
+            </ul>
+            <ul class="col2">
+              <li><span>Top Level Domain:</span> {{ country.topLevelDomain }}</li>
+              <li><span>Currencies:</span> {{ displayCurrencies(country.currencies) }}</li>
+              <li><span>Languages:</span> {{ displayLanguages(country.languages) }}</li>
+            </ul>
+          </section>
+          <section class="borders" *ngIf="borderCountries$ | async; let borderCountries">
+            <span>Border Countries:</span>
+            <a *ngFor="let borderCountry of borderCountries" [routerLink]="['/country/', borderCountry.alpha3Code]">
+              <button>
+                {{ borderCountry.name }}
+              </button>
+            </a>
+          </section>
+        </article>
+
+    </div>
+  </div>
+</main>

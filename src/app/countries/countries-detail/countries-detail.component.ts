@@ -1,0 +1,58 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, of, Subscription } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+import { CountriesService } from '../countries.service';
+import { Country, Language, Currency } from '../country.model';
+
+@Component({
+  selector: 'app-countries-detail',
+  templateUrl: './countries-detail.component.html',
+  styleUrls: ['./countries-detail.component.scss']
+})
+export class CountriesDetailComponent implements OnInit {
+
+  country$: Observable<Country>;
+  borderCountries$: Observable<Country[]>;
+
+
+  constructor(private countriesService: CountriesService, private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.country$ = this.countriesService
+      .getCountryByName(params.country)
+      .pipe(
+        mergeMap((res) => {
+          this.borderCountries$ = this.countriesService.getCountriesByCodes(res.borders);
+          return of(res);
+        })
+      );
+    });
+  }
+
+  ngOnDestroy() {
+
+  }
+
+  // getCountry(id): void {
+  //   this.countriesService.getCountry(id)
+  //     .subscribe(country => (
+  //       this.country = country,
+  //       this.currencies = country.currencies.map(s => s.name).join(", "),
+  //       this.languages = country.languages.map(s => s.name).join(", "),
+  //       this.borders = country.borders,
+
+  //       console.log(this.borders)
+  //       ));
+  // }
+
+  displayCurrencies(currencies: Currency[]) {
+    return currencies.map(currency => currency.name).join(', ');
+  }
+
+  displayLanguages(languages: Language[]) {
+    return languages.map(language => language.name).join(', ');
+  }
+
+}

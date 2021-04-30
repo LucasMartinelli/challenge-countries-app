@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
+import { LoaderService } from 'src/app/services/loader.service';
 import { CountriesService } from '../countries.service';
 import { Country, Language, Currency } from '../country.model';
 
@@ -15,7 +16,8 @@ export class CountriesDetailComponent implements OnInit {
   country$: Observable<Country>;
   borderCountries$: Observable<Country[]>;
 
-  constructor(private countriesService: CountriesService, private route: ActivatedRoute) { }
+  constructor(private countriesService: CountriesService, private route: ActivatedRoute,
+    public loaderService: LoaderService) { }
 
   ngOnInit() {
     window.scroll(0,0);

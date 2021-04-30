@@ -39,6 +39,9 @@
           </section>
           <section class="borders">
             <span class="border-title">Border Countries:</span>
+            <span *ngIf="loaderService.isLoading | async" class="loader-container">
+              Loading ...
+            </span>
             <span *ngIf="!borderCountries$">None.</span>
             <div class="borders-btns" *ngIf="borderCountries$ | async; let borderCountries">
               <a *ngFor="let borderCountry of borderCountries" [routerLink]="['/country/', borderCountry.alpha3Code]">

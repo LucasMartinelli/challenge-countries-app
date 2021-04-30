@@ -5,6 +5,7 @@ main {
   justify-content: center;
   flex-grow: 1;
   z-index: 0;
+  overflow-x: hidden;
 
   .container-detail {
     animation: fadeIn ease 300ms;
@@ -74,7 +75,7 @@ main {
         animation: fadeIn ease 300ms;
         padding-left: 6%;
         padding-top: 0px;
-        flex-grow: 1;
+        flex-grow: 1.4;
         flex-basis: 0;
         min-width: 400px;
         //max-width: 580px;
@@ -159,11 +160,14 @@ main {
     }
     .command-bar {
       margin-bottom: 60px !important;
+      margin-left: 7%;
     }
     .flag {
-      min-height: 250px !important;
-      height: 250px;
-      min-width: 330px !important;
+      min-height: 230px !important;
+      height: 230px;
+      min-width: 300px !important;
+      margin-left: 7%;
+      margin-right: 7%;
     }
     .info {
       min-width: 350px !important;

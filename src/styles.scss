@@ -11,13 +11,14 @@
   font-family: 'Nunito Sans', sans-serif;
 }
 
-html,body { height:100%; }
+html,body { height:100%; overflow-x: hidden; }
 
 body {
   margin: 0;
   background-color: var(--Very-Light-Gray);
   overflow: overlay;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -62,3 +63,6 @@ button,
 input { /* 1 */
   overflow: visible;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

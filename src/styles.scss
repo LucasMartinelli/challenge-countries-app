@@ -1,6 +1,6 @@
 :root {
 --Dark-Blue: hsl(209, 23%, 22%);
---Very-Dark-Blue: hsl(207, 26%, 17%);
+--Very-Dark-Blue-bg: hsl(207, 26%, 17%);
 --Very-Dark-Blue: hsl(200, 15%, 8%);
 --Dark-Gray: hsl(0, 0%, 52%);
 --Very-Light-Gray: hsl(0, 0%, 98%);
@@ -16,6 +16,26 @@ html,body { height:100%; }
 body {
   margin: 0;
   background-color: var(--Very-Light-Gray);
+  overflow: overlay;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--Dark-Gray);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--Dark-Blue);
 }
 
 main {

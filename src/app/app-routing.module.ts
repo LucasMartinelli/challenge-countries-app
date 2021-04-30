@@ -5,9 +5,9 @@ import { CountriesListComponent } from './countries/countries-list/countries-lis
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'list', pathMatch:'full' },
+  { path: '', component: CountriesListComponent },
   { path: 'country/:country', component: CountriesDetailComponent },
-  { path: 'list', component: CountriesListComponent },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

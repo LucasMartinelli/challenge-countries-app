@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { Country } from './country.model';
 
@@ -9,23 +9,26 @@ import { Country } from './country.model';
   providedIn: 'root'
 })
 export class CountriesService {
+  countries: Country[] = [];
 
-  private urlCountries = 'https://restcountries.eu/rest/v2/all?fields=name;flag;population;region;capital;alpha3Code';
-  //private urlCountry = 'https://restcountries.eu/rest/v2/alpha/';
-  //private urlBorders = 'https://restcountries.eu/rest/v2/alpha?codes=';
   private url = 'https://restcountries.eu/rest/v2';
 
 
   constructor(private http: HttpClient) {}
 
   getCountries() {
-    return this.http.get<Country[]>(`${this.url}/all`)
+    if (this.countries.length > 0) return of(this.countries);
+    return this.http.get<Country[]>(`${this.url}/all`).pipe(
+      map(countries => {
+        this.countries = countries;
+        return countries;
+      })
+    )
   }
 
   getCountryByName(name: string) {
     return this.http
-      .get<Country[]>(`${this.url}/name/${name}`)
-      .pipe(map(([res]) => res));
+      .get<Country>(`${this.url}/alpha/${name}`)
   }
 
   getCountriesByCodes(codes: string[]) {

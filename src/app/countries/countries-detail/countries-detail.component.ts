@@ -15,16 +15,18 @@ export class CountriesDetailComponent implements OnInit {
   country$: Observable<Country>;
   borderCountries$: Observable<Country[]>;
 
-
   constructor(private countriesService: CountriesService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.route.params.subscribe((params) => {
       this.country$ = this.countriesService
       .getCountryByName(params.country)
       .pipe(
-        mergeMap((res) => {
-          this.borderCountries$ = this.countriesService.getCountriesByCodes(res.borders);
+        mergeMap(res => {
+          if (res.borders.length > 0) {
+            this.borderCountries$ = this.countriesService.getCountriesByCodes(res.borders);
+          }
           return of(res);
         })
       );

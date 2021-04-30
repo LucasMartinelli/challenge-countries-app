@@ -1,8 +1,18 @@
 <main>
-  <div class="container">
+  <div class="container-detail">
     <div class="command-bar">
       <a routerLink="">
-        <button>Back</button>
+        <button>
+          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+            viewBox="0 0 64.000000 64.000000" preserveAspectRatio="xMidYMid meet" class="left">
+
+            <g transform="translate(0.000000,64.000000) scale(0.100000,-0.100000)" stroke="none">
+              <path d="M100 395 c-41 -38 -75 -73 -75 -77 0 -4 34 -37 75 -74 l75 -68 3 47
+          3 47 227 2 227 3 0 45 0 45 -227 3 -227 2 -3 48 -3 47 -75 -70z" />
+            </g>
+          </svg>
+          Back
+        </button>
       </a>
     </div>
     <div class="country-info" *ngIf="country$ | async as country">
@@ -27,13 +37,16 @@
               <li><span>Languages:</span> {{ displayLanguages(country.languages) }}</li>
             </ul>
           </section>
-          <section class="borders" *ngIf="borderCountries$ | async; let borderCountries">
-            <span>Border Countries:</span>
-            <a *ngFor="let borderCountry of borderCountries" [routerLink]="['/country/', borderCountry.alpha3Code]">
-              <button>
-                {{ borderCountry.name }}
-              </button>
-            </a>
+          <section class="borders">
+            <span class="border-title">Border Countries:</span>
+            <span *ngIf="!borderCountries$">None.</span>
+            <div class="borders-btns" *ngIf="borderCountries$ | async; let borderCountries">
+              <a *ngFor="let borderCountry of borderCountries" [routerLink]="['/country/', borderCountry.alpha3Code]">
+                <button>
+                  {{ borderCountry.name }}
+                </button>
+              </a>
+            </div>
           </section>
         </article>
 
